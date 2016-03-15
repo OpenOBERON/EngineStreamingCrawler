@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<crawlerFactories>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.crawler.filesystem.FileSystemCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.crawler.web.WebCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.crawler.imap.ImapCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.crawler.mbox.MboxCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.crawler.ical.IcalCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.outlook.OutlookCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.addressbook.thunderbird.ThunderbirdAddressbookCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.websites.bibsonomy.BibsonomyCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.websites.delicious.DeliciousCrawlerFactory</name>
+	</crawlerFactory>
+	<crawlerFactory>
+		<name>org.semanticdesktop.aperture.websites.flickr.FlickrCrawlerFactory</name>
+	</crawlerFactory>
+</crawlerFactories>

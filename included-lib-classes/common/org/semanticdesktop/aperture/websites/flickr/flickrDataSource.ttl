@@ -1,0 +1,101 @@
+@prefix fresnel:  <http://www.w3.org/2004/09/fresnel#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix sourceformat: <http://aperture.semanticdesktop.org/ontology/sourceformat#> .
+@prefix source: <http://aperture.semanticdesktop.org/ontology/2007/08/12/source#> .
+@prefix nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix tagging: <http://aperture.sourceforge.net/ontologies/tagging#> .
+@prefix : <http://aperture.semanticdesktop.org/ontology/2007/08/11/flickrds#> .
+@prefix nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+
+:FlickrDataSource a rdfs:Class ;
+	rdfs:subClassOf nie:DataSource ;
+	rdfs:label "Flickr Data Source" ;
+	rdfs:comment "Describes a Flickr account" .
+
+:FlickrDataSourceLens rdf:type fresnel:Lens ;
+                   fresnel:purpose fresnel:defaultLens ;
+                   fresnel:classLensDomain :FlickrDataSource ;
+                   fresnel:showProperties ( :accountToCrawl 
+                                            :apikey
+                                            :sharedSecret
+                                            :targetFolder
+                                            :crawlType
+                                           ) .
+                                            
+:crawlType a rdf:Property ;
+	rdfs:label "Crawl type" ;
+	rdfs:comment "Type of crawl" ;
+	rdfs:domain :FlickrDataSource ;
+	rdfs:range :CrawlType .
+	
+:CrawlType a rdfs:Class .
+:MetadataAndPicturesCrawlType a :CrawlType .
+:MetadataOnlyCrawlType a :CrawlType .
+
+
+:crawlTypeFormat rdf:type fresnel:Format ;
+    fresnel:propertyFormatDomain :crawlType ;
+    sourceformat:valueWidget [
+    	a sourceformat:ComboBoxWidget;
+		sourceformat:hasEntry [ 
+			a sourceformat:ComboBoxEntry ;
+			sourceformat:label "Metadata and Photos" ;
+			sourceformat:value :MetadataAndPicturesCrawlType  
+		] ;
+		sourceformat:hasEntry [ 
+			a sourceformat:ComboBoxEntry ;
+			sourceformat:label "Metadata only" ;
+			sourceformat:value :MetadataOnlyCrawlType 
+		] 
+    ] . 
+    
+:targetFolder a rdf:Property ;
+    rdfs:label "Photo Folder" ;
+    rdfs:comment "Path to the folder where local copies of your photos will be stored" ;
+    rdfs:domain :FlickrDataSource ;
+    rdfs:range xsd:string .
+    
+:targetFolderFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+    	a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :targetFolder .
+
+:accountToCrawl a rdf:Property ;
+    rdfs:label "Account the crawl" ;
+    rdfs:comment "The Flickr account that should be crawled" ;
+    rdfs:domain :FlickrDataSource ;
+    rdfs:range xsd:string .
+    
+:accountToCrawlFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+    	a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :accountToCrawl .
+
+
+:apikey a rdf:Property ;
+    rdfs:label "API Key" ;
+    rdfs:comment "The Flickr API key" ;
+    rdfs:domain :FlickrDataSource ;
+    rdfs:range xsd:string .
+    
+:apikeyFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+    	a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :apikey .
+
+:sharedSecret a rdf:Property ;
+    rdfs:label "Shared secret" ;
+    rdfs:comment "The shared secret associated with your Flicckr API key" ;
+    rdfs:domain :FlickrDataSource ;
+    rdfs:range xsd:string .
+    
+:sharedSecretFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+    	a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :sharedSecret .

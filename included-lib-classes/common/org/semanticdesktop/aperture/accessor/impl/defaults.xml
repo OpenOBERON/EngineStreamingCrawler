@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<dataAccessorFactories>
+	<dataAccessorFactory>
+		<name>org.semanticdesktop.aperture.accessor.file.FileAccessorFactory</name>
+	</dataAccessorFactory>
+	<dataAccessorFactory>
+		<name>org.semanticdesktop.aperture.accessor.http.HttpAccessorFactory</name>
+	</dataAccessorFactory>
+	<dataAccessorFactory>
+		<!-- Note: this class implements both AccessorFactory and CrawlerFactory -->
+		<name>org.semanticdesktop.aperture.crawler.imap.ImapCrawlerFactory</name>
+	</dataAccessorFactory>
+	<dataAccessorFactory>
+		<!-- Note: this class implements both AccessorFactory and CrawlerFactory -->
+		<name>org.semanticdesktop.aperture.crawler.mbox.MboxCrawlerFactory</name>
+	</dataAccessorFactory>
+</dataAccessorFactories>

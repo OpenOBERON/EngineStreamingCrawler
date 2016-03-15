@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<subCrawlerFactories>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.vcard.VcardSubCrawlerFactory</name>
+	</subCrawlerFactory>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.zip.ZipSubCrawlerFactory</name>
+	</subCrawlerFactory>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.gzip.GZipSubCrawlerFactory</name>
+	</subCrawlerFactory>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.tar.TarSubCrawlerFactory</name>
+	</subCrawlerFactory>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.bzip2.BZip2SubCrawlerFactory</name>
+	</subCrawlerFactory>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.compress.CompressSubCrawlerFactory</name>
+	</subCrawlerFactory>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.mime.MimeSubCrawlerFactory</name>
+	</subCrawlerFactory>
+	<subCrawlerFactory>
+		<name>org.semanticdesktop.aperture.subcrawler.mbox.MboxSubCrawlerFactory</name>
+	</subCrawlerFactory>
+</subCrawlerFactories>

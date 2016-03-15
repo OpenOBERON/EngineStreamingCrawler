@@ -1,0 +1,58 @@
+@prefix nfo:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+@prefix anie:    <http://www.semanticdesktop.org/ontologies/2009/10/06/aperture_nie_extensions#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nco:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nco#> .
+@prefix nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+
+# This file contains classes and properties that were deemed necessary to implement the 
+# features requested by the users, but were absent from the 'canonical' NIE at the time
+# of implementation. This ontology is deprecated by default. Every class and property 
+# from this ontology may be moved to the 'canonical' NIE at any time. Both the namespace
+# and the structure of the classes and properties may change.
+
+# you have been warned
+
+anie:SaveHistoryEntry a rdfs:Class ;
+  rdfs:comment "An entry on the history of saves for a document" . 
+
+anie:hasSaveHistoryEntry a rdf:Property ;
+  rdfs:domain nfo:Document ;
+  rdfs:range anie:SaveHistoryEntry .
+  
+anie:editor a rdf:Property ;
+  rdfs:domain anie:SaveHistoryEntry ;
+  rdfs:range  nco:Contact .
+  
+anie:location a rdf:Property ;
+  rdfs:domain anie:SaveHistoryEntry ;
+  rdfs:range xsd:string .
+  
+anie:index a rdf:Property ;
+  rdfs:domain anie:SaveHistoryEntry ;
+  rdfs:range xsd:integer .
+
+anie:hasSignature a rdf:Property ;
+  rdfs:domain nie:InformationElement ;
+  rdfs:range xsd:boolean .
+
+anie:signatureContainedIn a rdf:Property ;
+  rdfs:domain nie:InformationElement ;
+  rdfs:range nie:DataObject .
+  
+# The following metadata is returned for MS Office documents in
+# org.apache.poi.hpsf.SummaryInformation but not defined by canonical NIE.
+# See also: org.semanticdesktop.aperture.extractor.microsoft.util.PoiUtil
+
+anie:contentLastPrinted a rdf:Property ;
+  rdfs:domain nfo:Document ;
+  rdfs:range  xsd:dateTime .
+  
+anie:editTime a rdf:Property ;
+  rdfs:domain nfo:Document ;
+  rdfs:range xsd:long .
+  
+anie:template a rdf:Property ;
+  rdfs:domain nfo:Document ;
+  rdfs:range xsd:string .

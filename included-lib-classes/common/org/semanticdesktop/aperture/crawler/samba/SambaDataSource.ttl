@@ -1,0 +1,84 @@
+@prefix fresnel:  <http://www.w3.org/2004/09/fresnel#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix sourceformat: <http://aperture.semanticdesktop.org/ontology/sourceformat#> .
+@prefix source: <http://aperture.semanticdesktop.org/ontology/2007/08/12/source#> .
+@prefix nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix : <http://aperture.semanticdesktop.org/ontology/2010/05/19/sambads#> .
+
+:SambaDataSource a rdfs:Class ;
+	rdfs:subClassOf nie:DataSource ;
+	rdfs:label "Samba Data Source" ;
+	rdfs:comment "Describes a samba network share" .
+
+:SambaDataSourceLens rdf:type fresnel:Lens ;
+					fresnel:purpose fresnel:defaultLens ;
+					fresnel:classLensDomain :SambaDataSource ;
+					fresnel:showProperties ( :domain 
+					                         :server
+					                         :port
+					                         source:username 
+					                         source:password 
+					                         :share
+					                         :path ) .
+
+:domain a rdf:Property ; 
+    rdfs:label "Domain or workgroup" ;
+    rdfs:comment "The name of the domain or workgroup" ;
+    rdfs:domain :SambaDataSource;
+    rdfs:range xsd:string .
+    
+:domainFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :domain . 
+
+:server a rdf:Property ; 
+    rdfs:label "Host name" ;
+    rdfs:comment "The DNS name or the IP address of the server" ;
+    rdfs:domain :SambaDataSource;
+    rdfs:range xsd:string .
+    
+:serverFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :server .
+
+:port a rdf:Property ;
+    rdfs:label "Port number" ;
+    rdfs:comment "The port number where the server is listening for connections" ;
+    rdfs:domain :SambaDataSource ;
+    rdfs:range xsd:integer .
+    
+:portFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :port  .
+
+:share a rdf:Property ; 
+    rdfs:label "Share" ;
+    rdfs:comment "The name of the network share" ;
+    rdfs:domain :SambaDataSource;
+    rdfs:range xsd:string .
+    
+:shareFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :share .  
+    
+:path a rdf:Property ; 
+    rdfs:label "Path" ;
+    rdfs:comment "Path to the file or folder that is to be crawled" ;
+    rdfs:domain :SambaDataSource;
+    rdfs:range xsd:string .
+    
+:pathFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :path .

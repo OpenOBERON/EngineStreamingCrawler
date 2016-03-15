@@ -1,0 +1,188 @@
+@prefix fresnel:  <http://www.w3.org/2004/09/fresnel#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix sourceformat: <http://aperture.semanticdesktop.org/ontology/sourceformat#> .
+@prefix source: <http://aperture.semanticdesktop.org/ontology/2007/08/12/source#> .
+@prefix nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix : <http://aperture.semanticdesktop.org/ontology/2007/08/12/imapds#> .
+
+:ImapDataSource a rdfs:Class ;
+	rdfs:subClassOf nie:DataSource ;
+	rdfs:label "IMAP Account Data Source" ;
+	rdfs:comment "Describes a mailbox accessible with the IMAP protocol" .
+
+:ImapDataSourceLens rdf:type fresnel:Lens ;
+                    fresnel:purpose fresnel:defaultLens ;
+                    fresnel:classLensDomain :ImapDataSource ;
+                    fresnel:showProperties ( :hostname
+                                             :port
+                                             source:username
+                                             source:password
+                                             :basepath
+                                             :includeInbox
+                                             :maximumSize
+                                             :maximumDepth
+                                             :ignoreUidValidity
+                                             :connectionSecurity 
+                                             :sslFileName
+                                             :sslFilePassword 
+                                             :useHeadersHash
+                                             source:includePattern
+                                             source:excludePattern ) .
+                                             
+:hostname a rdf:Property ; 
+    rdfs:label "Host name" ;
+    rdfs:comment "The host name of the IMAP server" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:string .
+    
+:hostnameFolderFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :hostname .                                             
+
+:port a rdf:Property ;
+    rdfs:label "Port number" ;
+    rdfs:comment "The port number where the IMAP server is listening for connections" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:integer .
+    
+:portFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :port  .
+
+:basepath a rdf:Property ;
+    rdfs:label "Base Path" ;
+    rdfs:comment "The base path of the IMAP data source" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:string .
+    
+:basepathFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:MultipleTextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :basepath .
+    
+:includeInbox a rdf:Property ;
+    rdfs:label "Include Inbox?" ;
+    rdfs:comment "Should the inbox itself be included in the crawl results?" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:boolean .
+    
+:includeInboxFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:CheckBoxWidget 
+    ] ;
+    fresnel:propertyFormatDomain :includeInbox .
+
+:maximumDepth a rdf:Property ;
+    rdfs:label "Maximum Depth" ;
+    rdfs:comment "Maximum depth of the crawl" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:integer .
+    
+:maximumDepthFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:IntegerFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :maximumDepth .
+    
+:maximumSize a rdf:Property ;
+    rdfs:label "Maximum Size" ;
+    rdfs:comment "Maximum size (in bytes) of the attachments that are to be reported by the crawler" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:long .
+    
+:maximumSizeFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:IntegerFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :maximumSize .
+    
+:ignoreUidValidity a rdf:Property ;
+    rdfs:label "Ignore UID Validity?" ;
+    rdfs:comment "Should the crawler ignore the UID validity? THIS OPTION MAY BE DANGEROUS, USE AT YOUR OWN RISK, ONLY ON FAULTY SERVERS THAT DON'T PERSIST EMAIL IDs, ONLY IF YOU DON'T DELETE ANY EMAILS AND ONLY IF YOU REALLY NEED IT!!!! IF YOU DO DELETE AN EMAIL FROM SUCH A SERVER, THE CRAWLER WILL RETURN WRONG RESULTS" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:boolean .
+    
+:ignoreUidValidityFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:CheckBoxWidget 
+    ] ;
+    fresnel:propertyFormatDomain :ignoreUidValidity .
+    
+    
+:connectionSecurity a rdf:Property ;
+	rdfs:label "Connection security" ;
+	rdfs:comment "The level of security for the connection" ;
+	rdfs:domain :IMAPDataSource ;
+	rdfs:range :ConnectionSecurity .    
+    
+:ConnectionSecurity a rdfs:Class ;
+	rdfs:subClassOf rdfs:Resource ;
+	rdfs:comment "Type of connection security, instances of this class serve as values for the connectionSecurity property " .
+
+:PLAIN a :ConnectionSecurity .
+:SSL a :ConnectionSecurity .
+:SSL_NO_CERT a :ConnectionSecurity .
+
+:connectionSecurityFormat rdf:type fresnel:Format ;
+	fresnel:propertyFormatDomain :connectionSecurity ;
+	sourceformat:valueWidget [ 
+		a sourceformat:ComboBoxWidget;
+		sourceformat:hasEntry [ 
+			a sourceformat:ComboBoxEntry ;
+			sourceformat:label "No security" ;
+			sourceformat:value :PLAIN 
+		] ;
+		sourceformat:hasEntry [ 
+			a sourceformat:ComboBoxEntry ;
+			sourceformat:label "SSL (with certificate)" ;
+			sourceformat:value :SSL
+		] ;
+		sourceformat:hasEntry [ 
+			a sourceformat:ComboBoxEntry ;
+			sourceformat:label "SSL (without certificate)" ;
+			sourceformat:value :SSL_NO_CERT  
+		] 
+	] .
+
+:sslFileName a rdf:Property ;
+    rdfs:label "SSL File Name" ;
+    rdfs:comment "The path to the ssl keyfile" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:string .
+    
+:sslFileNameFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:TextFieldWidget 
+    ] ;
+    fresnel:propertyFormatDomain :sslFileName .
+
+:sslFilePassword a rdf:Property ;
+    rdfs:label "SSL File Password" ;
+    rdfs:comment "Keyphrase for the SSL keyfile" ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:string .
+    
+:sslFilePasswordFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:PasswordTextFieldWidget  
+    ] ;
+    fresnel:propertyFormatDomain :sslFilePassword .
+    
+:useHeadersHash a rdf:Property ;
+    rdfs:label "Use Headers Hash" ;
+    rdfs:comment "On mh-backed IMAP folders the crawler doesn't use the UID as part of the URI. Instead it uses the value of the Message-ID header combined with a hash of the entire message. This is slow as each incremental crawl requires the crawler do download all messages. Setting this option to true will cause the crawler to use only values of selected headers in hash computation. This increases the incremental crawling speed on mh-backed folders at the expense of overlooking certain messages with the same Message-ID and other headers values, but different content. The default is true for speed. If you need accuracy, to be 100% sure that no near-duplicate message pairs are omitted - set it to false." ;
+    rdfs:domain :IMAPDataSource ;
+    rdfs:range xsd:boolean .
+    
+:useHeadersHashFormat a fresnel:Format ;
+    sourceformat:valueWidget [
+        a sourceformat:CheckBoxWidget 
+    ] ;
+    fresnel:propertyFormatDomain :useHeadersHash .
